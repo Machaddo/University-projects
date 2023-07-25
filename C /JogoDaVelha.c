@@ -45,7 +45,8 @@ int analisar_jogo(char m[3][3]) {
   return 4;
 }
 
-bool jogada_valida(char m[3][3], char jogador, int i, int j) {
+bool jogada_valida(char m[3][3], char jogador, int i, int j) 
+{
   if (i < 0 || i > 2) return false;
   
   if (j < 0 || j > 2) return false;
@@ -110,7 +111,16 @@ void fazer_minha_jogada(char m[3][3]) {
   }
 }
 
-void imprimir(char m[3][3]) {
+void iniciar_jogo(char m[3][3]) {
+  int i, j;
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
+      m[i][j] = '.';
+    }
+  }
+}
+
+void exibir_velha(char m[3][3]) {
   int i;
   printf("\n");
   printf("    1 2 3\n");
@@ -121,15 +131,6 @@ void imprimir(char m[3][3]) {
       printf("    -----\n");
   }
   printf("\n");
-}
-
-void iniciar(char m[3][3]) {
-  int i, j;
-  for (i = 0; i < 3; i++) {
-    for (j = 0; j < 3; j++) {
-      m[i][j] = '.';
-    }
-  }
 }
 
 void exibir_resultado(int status){
@@ -165,8 +166,8 @@ int main() {
   srand(time(NULL));
   if (rand() % 2 == 0) vez = 'O';
 
-  iniciar(velha);
-  imprimir(velha);
+  iniciar_jogo(velha);
+  exibir_velha(velha);
 
   while (!terminou) {
     if (vez == 'X') {
@@ -191,7 +192,7 @@ int main() {
       velha[linha - 1][coluna - 1] = vez;
     }
 
-    imprimir(velha);
+    exibir_velha(velha);
 
     status = analisar_jogo(velha);
     terminou = (status != 4);
