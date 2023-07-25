@@ -38,21 +38,26 @@ bool empatou(char m[3][3]) {
 }
 
 int analisar_jogo(char m[3][3]) {
-  if (ganhou(m, 'X')) return 1;
-  else if (ganhou(m, 'O')) return 2;
-  else if (empatou(m)) return 3;
-  
+  if (ganhou(m, 'X'))
+    return 1;
+  else if (ganhou(m, 'O'))
+    return 2;
+  else if (empatou(m))
+    return 3;
+
   return 4;
 }
 
-bool jogada_valida(char m[3][3], char jogador, int i, int j) 
-{
-  if (i < 0 || i > 2) return false;
-  
-  if (j < 0 || j > 2) return false;
-  
-  if (m[i][j] != '.') return false;
-  
+bool jogada_valida(char m[3][3], char jogador, int i, int j) {
+  if (i < 0 || i > 2)
+    return false;
+
+  if (j < 0 || j > 2)
+    return false;
+
+  if (m[i][j] != '.')
+    return false;
+
   return true;
 }
 
@@ -133,16 +138,16 @@ void exibir_velha(char m[3][3]) {
   printf("\n");
 }
 
-void exibir_resultado(int status){
-  if (status == 1)
+void exibir_resultado(int resultado) {
+  if (resultado == 1)
     printf("\n# Jogador X ganhou!\n\n");
-  else if (status == 2)
+  else if (resultado == 2)
     printf("\n# Jogador O ganhou!\n\n");
   else
     printf("\n# Empatou!\n\n");
 }
 
-bool mais_uma_rodada(){
+bool mais_uma_rodada() {
   char resp;
   printf("Mais uma rodada ? (s/n): ");
   scanf(" %c", &resp);
@@ -160,11 +165,12 @@ bool mais_uma_rodada(){
 int main() {
   char velha[3][3] = {{'X', '.', 'O'}, {'X', 'O', '.'}, {'X', 'X', 'O'}};
   char vez = 'X';
-  int status = 1;
+  int resultado = 1;
   bool terminou = false;
 
   srand(time(NULL));
-  if (rand() % 2 == 0) vez = 'O';
+  if (rand() % 2 == 0)
+    vez = 'O';
 
   iniciar_jogo(velha);
   exibir_velha(velha);
@@ -194,18 +200,21 @@ int main() {
 
     exibir_velha(velha);
 
-    status = analisar_jogo(velha);
-    terminou = (status != 4);
+    resultado = analisar_jogo(velha);
+    terminou = (resultado != 4);
 
-    if (vez == 'X') vez = 'O';
-    else vez = 'X';
+    if (vez == 'X')
+      vez = 'O';
+    else
+      vez = 'X';
   }
 
-  exibir_resultado(status);
+  exibir_resultado(resultado);
 
-  if (mais_uma_rodada()) return main();
+  if (mais_uma_rodada())
+    return main();
 
   printf("\nAté mais!");
-  
+
   return 0;
 }
