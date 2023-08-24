@@ -1,5 +1,0 @@
-Nome do jogador: 
-Palavra sorteada: 
-
-Número de tentativas: 
-Tempo total até acertar: 
